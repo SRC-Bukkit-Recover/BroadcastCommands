@@ -1,0 +1,34 @@
+# send-to:
+# + everyone
+# + me
+# + permission:<permission>
+# + op
+register-commands:
+  - "rules"
+  - "help"
+commands:
+  rules:
+    permission: commands.rules
+    send-to: everyone
+    text:
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+  help:
+    permission: commands.help
+    send-to: me
+    text:
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""
+      - ""

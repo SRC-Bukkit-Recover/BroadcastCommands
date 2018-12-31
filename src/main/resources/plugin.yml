@@ -1,0 +1,17 @@
+name: BroadcastCommands
+version: ${project.version}
+main: me.hsgamer.broadcastcommands.BroadcastCommands
+api-version: 1.13
+authors: [HSGamer]
+description: Custom commands that broadcasts text to everyone
+
+commands:
+  broadcastcommands:
+    aliases: [bc]
+    description: Main command
+
+permissions:
+  broadcastcommands.help:
+    default: op
+  broadcastcommands.list:
+    default: op
