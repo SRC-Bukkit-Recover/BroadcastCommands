@@ -14,13 +14,21 @@ public class PluginCommand implements CommandExecutor {
                 if (sender.hasPermission("BroadcastCommands.help")) {
                     sender.sendMessage(ChatColor.AQUA + "/" + label + " help");
                     sender.sendMessage(ChatColor.AQUA + "/" + label + " list");
+                    sender.sendMessage(ChatColor.AQUA + "/" + label + " reload");
                 } else {
                     sender.sendMessage(ChatColor.RED + "You don't have the permission to do this");
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (sender.hasPermission("BroadcastCommands.list")) {
                     sender.sendMessage(ChatColor.BOLD + "Registered Commands:");
-                    sender.sendMessage(BroadcastCommands.getRegistered().toString());
+                    sender.sendMessage(BroadcastCommands.getRegistered().keySet().toString());
+                } else {
+                    sender.sendMessage(ChatColor.RED + "You don't have the permission to do this");
+                }
+            } else if (args[0].equalsIgnoreCase("reload")) {
+                if (sender.hasPermission("BroadcastCommands.reload")) {
+                    BroadcastCommands.getInstance().reload();
+                    sender.sendMessage(ChatColor.GREEN + "Reloaded");
                 } else {
                     sender.sendMessage(ChatColor.RED + "You don't have the permission to do this");
                 }
