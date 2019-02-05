@@ -81,7 +81,7 @@ public final class BroadcastCommands extends JavaPlugin {
     private void register(String name, List<String> messages, CommandType type, String permission, String receiverPermission) {
         Commands command = new Commands(name, messages, type, permission, receiverPermission);
         if (registered.containsValue(command)) {
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Duplicated " + name + " ! Ignored");
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Duplicated " + ChatColor.WHITE + name + ChatColor.RED + " ! Ignored");
             return;
         }
 
@@ -105,6 +105,7 @@ public final class BroadcastCommands extends JavaPlugin {
         for (String name : registered.keySet()) {
             unregisterCommand(registered.remove(name));
         }
+        reloadConfig();
         for (String string : getConfig().getStringList("register-commands")) {
             List<String> messages = colorize(getConfig().getStringList("commands." + string + ".text"));
             CommandType type = getCommandType(getConfig().getString("commands." + string + ".send-to").toLowerCase());
