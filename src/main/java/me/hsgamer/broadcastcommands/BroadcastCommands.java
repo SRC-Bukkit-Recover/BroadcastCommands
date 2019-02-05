@@ -88,6 +88,7 @@ public final class BroadcastCommands extends JavaPlugin {
         }
 
         BUKKIT_COMMAND_MAP.register(getInstance().getName(), command);
+        registered.put(name, command);
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + name + " successfully registered");
     }
 
