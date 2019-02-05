@@ -42,7 +42,8 @@ public final class BroadcastCommands extends JavaPlugin {
             CommandType type = getCommandType(getConfig().getString("commands." + string + ".send-to").toLowerCase());
             String permission = getConfig().getString("commands." + string + ".permission", null);
             String receiverPermission = (type == CommandType.PERMISSION) ? (getConfig().getString("commands." + string + ".send-to").split(":"))[1] : null;
-            register(string, messages, type, permission, receiverPermission);
+            String world = (type == CommandType.WORLD) ? (getConfig().getString("commands." + string + ".send-to").split(":"))[1] : null;
+            register(string, messages, type, permission, receiverPermission, world);
         }
         getCommand("broadcastcommands").setExecutor(new PluginCommand());
     }
@@ -75,11 +76,12 @@ public final class BroadcastCommands extends JavaPlugin {
         if (string.startsWith("op")) return CommandType.OP;
         if (string.startsWith("permission")) return CommandType.PERMISSION;
         if (string.startsWith("me")) return CommandType.ME;
+        if (string.startsWith("world")) return CommandType.WORLD;
         return null;
     }
 
-    private void register(String name, List<String> messages, CommandType type, String permission, String receiverPermission) {
-        Commands command = new Commands(name, messages, type, permission, receiverPermission);
+    private void register(String name, List<String> messages, CommandType type, String permission, String receiverPermission, String world) {
+        Commands command = new Commands(name, messages, type, permission, receiverPermission, world);
         if (registered.containsValue(command)) {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Duplicated " + ChatColor.WHITE + name + ChatColor.RED + " ! Ignored");
             return;
@@ -89,7 +91,7 @@ public final class BroadcastCommands extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + name + " successfully registered");
     }
 
-    public void unregisterCommand(Commands command) {
+    private void unregisterCommand(Commands command) {
         try {
             Map<?, ?> knownCommands = (Map<?, ?>) KNOWN_COMMANDS_FIELD.get(BUKKIT_COMMAND_MAP);
 
@@ -111,7 +113,8 @@ public final class BroadcastCommands extends JavaPlugin {
             CommandType type = getCommandType(getConfig().getString("commands." + string + ".send-to").toLowerCase());
             String permission = getConfig().getString("commands." + string + ".permission", null);
             String receiverPermission = (type == CommandType.PERMISSION) ? (getConfig().getString("commands." + string + ".send-to").split(":"))[1] : null;
-            register(string, messages, type, permission, receiverPermission);
+            String world = (type == CommandType.WORLD) ? (getConfig().getString("commands." + string + ".send-to").split(":"))[1] : null;
+            register(string, messages, type, permission, receiverPermission, world);
         }
     }
 }

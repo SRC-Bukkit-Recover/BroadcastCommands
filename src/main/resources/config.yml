@@ -3,6 +3,7 @@
 # + me
 # + permission:<permission>
 # + op
+# + world:<world>
 register-commands:
   - "rules"
   - "help"

@@ -4,5 +4,6 @@ public enum CommandType {
     PERMISSION,
     EVERYONE,
     ME,
-    OP
+    OP,
+    WORLD
 }

@@ -14,13 +14,15 @@ public class Commands extends BukkitCommand {
     private CommandType type;
     private String permission;
     private String receiverPermission;
+    private String world;
 
-    public Commands(String label, List<String> messages, CommandType type, String permission, String receiverPermission) {
+    public Commands(String label, List<String> messages, CommandType type, String permission, String receiverPermission, String world) {
         super(label);
         this.messages = messages;
         this.type = type;
         this.permission = permission;
         this.receiverPermission = receiverPermission;
+        this.world = world;
     }
 
     @Override
@@ -38,8 +40,8 @@ public class Commands extends BukkitCommand {
                         if (player.isOp()) {
                             sendMessage(player, messages);
                         }
-                        sendMessage(sender, messages);
                     }
+                    sendMessage(sender, messages);
                     return true;
                 }
                 case EVERYONE: {
@@ -56,8 +58,17 @@ public class Commands extends BukkitCommand {
                         if (player.hasPermission(receiverPermission)) {
                             sendMessage(player, messages);
                         }
-                        sendMessage(player, messages);
                     }
+                    sendMessage(sender, messages);
+                    return true;
+                }
+                case WORLD: {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        if (player.getWorld().getName().equals(world)) {
+                            sendMessage(player, messages);
+                        }
+                    }
+                    sendMessage(sender, messages);
                     return true;
                 }
             }
