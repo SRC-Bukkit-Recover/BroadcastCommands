@@ -106,8 +106,9 @@ public final class BroadcastCommands extends JavaPlugin {
 
     public void reload() {
         for (String name : registered.keySet()) {
-            unregisterCommand(registered.remove(name));
+            unregisterCommand(registered.get(name));
         }
+        registered.clear();
         reloadConfig();
         for (String string : getConfig().getStringList("register-commands")) {
             List<String> messages = colorize(getConfig().getStringList("commands." + string + ".text"));
