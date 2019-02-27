@@ -3,6 +3,7 @@ version: ${project.version}
 main: me.hsgamer.broadcastcommands.BroadcastCommands
 api-version: 1.13
 authors: [HSGamer]
+softdepend: [PlaceholderAPI]
 description: Custom commands that broadcasts text to everyone
 
 commands:

@@ -1,5 +1,7 @@
 package me.hsgamer.broadcastcommands.commands;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+import me.hsgamer.broadcastcommands.BroadcastCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -9,14 +11,14 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class Commands extends BukkitCommand {
+public class Command extends BukkitCommand {
     private List<String> messages;
     private CommandType type;
     private String permission;
     private String receiverPermission;
     private String world;
 
-    public Commands(String label, List<String> messages, CommandType type, String permission, String receiverPermission, String world) {
+    public Command(String label, List<String> messages, CommandType type, String permission, String receiverPermission, String world) {
         super(label);
         this.messages = messages;
         this.type = type;
@@ -78,13 +80,21 @@ public class Commands extends BukkitCommand {
 
     private void sendMessage(CommandSender receiver, List<String> messages) {
         for (String message : messages) {
-            receiver.sendMessage(message);
+            String temp = message;
+            if (BroadcastCommands.isPlaceholderAPI() && (receiver instanceof Player)) {
+                temp = PlaceholderAPI.setPlaceholders((Player) receiver, temp);
+            }
+            receiver.sendMessage(temp);
         }
     }
 
     private void sendMessage(Player receiver, List<String> messages) {
         for (String message : messages) {
-            receiver.sendMessage(message);
+            String temp = message;
+            if (BroadcastCommands.isPlaceholderAPI()) {
+                temp = PlaceholderAPI.setPlaceholders(receiver, temp);
+            }
+            receiver.sendMessage(temp);
         }
     }
 }

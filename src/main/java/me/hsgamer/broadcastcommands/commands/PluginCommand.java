@@ -20,7 +20,7 @@ public class PluginCommand implements CommandExecutor {
                 }
             } else if (args[0].equalsIgnoreCase("list")) {
                 if (sender.hasPermission("BroadcastCommands.list")) {
-                    sender.sendMessage(ChatColor.BOLD + "Registered Commands:");
+                    sender.sendMessage(ChatColor.BOLD + "Registered Command:");
                     sender.sendMessage(BroadcastCommands.getRegistered().keySet().toString());
                 } else {
                     sender.sendMessage(ChatColor.RED + "You don't have the permission to do this");

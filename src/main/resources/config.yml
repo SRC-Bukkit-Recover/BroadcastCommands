@@ -4,9 +4,6 @@
 # + permission:<permission>
 # + op
 # + world:<world>
-register-commands:
-  - "rules"
-  - "help"
 commands:
   rules:
     permission: commands.rules
